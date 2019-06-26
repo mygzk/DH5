@@ -9,27 +9,32 @@
     <link rel="stylesheet" href="css/animate.min.css"/>
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="css/swiper.min.css">
-
+    <!-- slidle1 css-->
+    <link rel="stylesheet" href="css/slide1.css">
+    <link rel="stylesheet" href="css/slide2.css">
     <!-- Demo styles -->
     <style>
         html, body {
             position: relative;
             height: 100%;
         }
+
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color:#000;
+            color: #000;
             margin: 0;
             padding: 0;
         }
-        @media (max-width: 768px){
+
+        @media (max-width: 768px) {
             .swiper-container {
                 width: 100%;
                 height: 100%;
             }
         }
+
         @media (min-width: 1024px) {
             .swiper-container {
                 width: 40%;
@@ -56,118 +61,119 @@
             -webkit-align-items: center;
             align-items: center;
         }
-        .bottom{
+
+        .bottom {
             position: fixed;
             bottom: 0px;
             margin-left: -52px;
             left: 50%;
             z-index: 2015;
         }
-        .slide1{
-            position: relative;
-        }
-        .slide1 img:nth-child(1){
-            width: 100%;
-            height: 40%;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .slide1 img:nth-child(2){
-            width: 100%;
-            height: 40%;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .slide1 img:nth-child(3){
-            width: 18%;
-            height: 30%;
-            position: absolute;
-            left: 3%;
-            top: 10%;
-        }
-        .slide1 img:nth-child(4){
-            width: 100%;
-            height: 90%;
-            position: absolute;
-            left: 0;
-            top: 30%;
-        }
-        .slide1 img:nth-child(5){
-            width: 70%;
-            position: absolute;
-            margin: 0 auto;
-            top: 45%;
-        }
-        .slide1 img:nth-child(6) {
-            width: 30%;
-            position: absolute;
-            right: 5%;
-            top: 40%;
-        }
-        .slide1 img:nth-child(7) {
-            width: 30%;
-            position: absolute;
-            right: 5%;
-            top: 10%;
-            transform: rotateY(180deg);
-        }
-        .slide1 p{
-            position: absolute;
-            color: #fff110;
-            top: 60%;
-            width: 80%;
-            font-size: 14px;
-        }
-        .slide1 h2{
-              position: absolute;
-              color: #fff110;
-              top: 62%;
-              width: 80%;
-          }
-        .slide1 span{
-            position: absolute;
-            color: #cb0202;
-            background: #fff110;
-            top: 80%;
-            width: 30%;
-            padding: 2%;
-            font-weight: 700;
-        }
+
+
     </style>
 </head>
 <body>
 <!-- Swiper -->
 <div class="swiper-container">
     <div class="swiper-wrapper">
+        <!-- 第一页-->
         <article class="swiper-slide slide1">
             <img src="img/shanghetu.png">
-            <img src="img/tiananmen.png"  class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s" swiper-animate-delay="0.1s"  >
-            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="0.5s" >
-            <img src="img/bg_main01.png" >
-            <img src="img/zhongguomeng.png" class="ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1s" swiper-animate-delay="0.1s"  >
-            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s"  >
-            <img src="img/baige01.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s"  >
+            <img src="img/tiananmen.png" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.5s">
+            <img src="img/bg_main01.png">
+            <img src="img/zhongguomeng.png" class="ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <img src="img/baige01.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
             <p>应/用/开/发/七/部</p>
-            <h2 class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s" swiper-animate-delay="0.1s">党建知识测试问答</h2>
-            <span class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0.1s">开始答题</span>
+            <h2 class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
+                党建知识测试问答</h2>
+            <span id="startBtn" class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s"
+                  swiper-animate-delay="0.1s">开始答题</span>
         </article>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div>
-        <div class="swiper-slide">Slide 10</div>
+
+
+        <article class="swiper-slide slide2">
+            <img src="img/bg_main02.jpg">
+            <img src="img/tiananmen.png">
+            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.5s">
+            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <div>
+                <h3>1.植树节是哪一天？</h3>
+                <ul>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
+                    </li>
+                </ul>
+            </div>
+
+        </article>
+        <article class="swiper-slide slide2">
+            <img src="img/bg_main02.jpg">
+            <img src="img/tiananmen.png">
+            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.5s">
+            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <div>
+                <h3>1.植树节是哪一天？</h3>
+                <ul>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <article class="swiper-slide slide2">
+            <img src="img/bg_main02.jpg">
+            <img src="img/tiananmen.png">
+            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.5s">
+            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                 swiper-animate-delay="0.1s">
+            <div>
+                <h3>1.植树节是哪一天？</h3>
+                <ul>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
+                    </li>
+                </ul>
+            </div>
+        </article>
+
     </div>
     <a href="#" id="btn2">
         <img src="img/bottom.png" class="bottom" id="bottom">
     </a>
+    <span id="submitBtn">提交答题</span>
     <!-- Add Pagination -->
-<!--   <div class="swiper-pagination"></div>-->
+    <!--   <div class="swiper-pagination"></div>-->
 </div>
 
 <!-- Swiper JS -->
@@ -179,15 +185,40 @@
         pagination: '.swiper-pagination',
         paginationClickable: true,
         direction: 'vertical',
-        onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+        onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
             swiperAnimateCache(swiper); //隐藏动画元素
             swiperAnimate(swiper); //初始化完成开始动画
         },
+        onSlideChangeEnd: function (swiper) {
+            var aArticle = $('article');
+           if(swiper.activeIndex === aArticle.length-1){
+               $('#submitBtn').show();
+               $('#btn2').hide();
+              // swiper.lockSwipes();
+           }else{
+               $('#submitBtn').hide();
+               $('#btn2').show();
+           } //切换结束时，告诉我现在是第几个slide
+            swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+        }
     });
-    $('#btn2').on('click', function(e){
+    $('#btn2').on('click', function (e) {
+        nextSlidle(e,swiper);
+    })
+
+    $('#startBtn').on('click', function (e) {
+        nextSlidle(e,swiper);
+    })
+
+    $('.slide2 ul').on('click','li', function (e) {
+        nextSlidle(e,swiper);
+    })
+
+    //下一页
+    function nextSlidle(e,swiper) {
         swiper.slideNext()
         e.stopPropagation();
-    })
+    }
 </script>
 </body>
 </html>
