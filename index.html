@@ -112,21 +112,24 @@
 
 <!-- Initialize Swiper -->
 <script>
-    var templ="";
-    $.ajax({
-        url: "json/data.json",//json文件位置
-        type: "GET",//请求方式为get
-        dataType: "json", //返回数据格式为json
-        success: function (res) {//请求成功完成后要执行的方法
-            //each循环 使用$.each方法遍历返回的数据date
-            $.each(res, function (i, item) {
-                var template2 = '';
-                $.each(item.content, function (index, val) {
-                    template2 += `<li>
+    $(function(){
+        var datas;
+        var templ="";
+        $.ajax({
+            url: "json/data.json",//json文件位置
+            type: "GET",//请求方式为get
+            dataType: "json", //返回数据格式为json
+            success: function (res) {//请求成功完成后要执行的方法
+                datas=res;
+                //each循环 使用$.each方法遍历返回的数据date
+                $.each(res, function (i, item) {
+                    var template2 = '';
+                    $.each(item.content, function (index, val) {
+                        template2 += `<li>
                         <label><input type="radio" name="${'name' + i}" value='${index}'> ${val}</label>
                     </li>`;
-                });
-                templ = `
+                    });
+                    templ += `
                  <article class="swiper-slide slide2">
                     <img src="img/bg_main02.jpg">
                     <img src="img/tiananmen.png">
@@ -142,60 +145,71 @@
                     </div>
                  </article>
                `;
-                $('.swiper-wrapper').append(templ);
-            })
+                })
 
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true,
-                direction: 'vertical',
-                onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
-                    swiperAnimateCache(swiper); //隐藏动画元素
-                    swiperAnimate(swiper); //初始化完成开始动画
-                },
-                onSlideChangeEnd: function (swiper) {
-                    var aArticle = $('article');
-                    console.log(aArticle.length-1);
-                    if(swiper.activeIndex === aArticle.length-1){
-                        $('#submitBtn').show();
-                        $('#btn2').hide();
-                        // swiper.lockSwipes();
-                    }else{
-                        $('#submitBtn').hide();
-                        $('#btn2').show();
-                    } //切换结束时，告诉我现在是第几个slide
-                    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true,
+                    direction: 'vertical',
+                    onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
+                        swiperAnimateCache(swiper); //隐藏动画元素
+                        swiperAnimate(swiper); //初始化完成开始动画
+                    },
+                    onSlideChangeEnd: function (swiper) {
+                        var aArticle = $('article');
+                        // console.log(swiper.activeIndex);
+                        // console.log(aArticle.length-1);
+                        if(swiper.activeIndex === aArticle.length-1){
+                            $('#submitBtn').show();
+                            $('#btn2').hide();
+                            // swiper.lockSwipes();
+                        }else{
+                            $('#submitBtn').hide();
+                            $('#btn2').show();
+                        } //切换结束时，告诉我现在是第几个slide
+                        swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+                    }
+                });
+                swiper.appendSlide(templ);
+                $('#btn2').on('click', function (e) {
+                    nextSlidle(e,swiper);
+                })
+
+                $('#startBtn').on('click', function (e) {
+                    nextSlidle(e,swiper);
+                })
+
+                $('.slide2 ul').on('click','input', function (e) {
+                    nextSlidle(e,swiper);
+                })
+
+                //下一页
+                function nextSlidle(e,swiper) {
+                    swiper.slideNext();
+                    e.stopPropagation();
                 }
-            });
-            $('#btn2').on('click', function (e) {
-                nextSlidle(e,swiper);
-            })
 
-            $('#startBtn').on('click', function (e) {
-                nextSlidle(e,swiper);
-            })
 
-            $('.slide2 ul').on('click','li', function (e) {
-                nextSlidle(e,swiper);
-            })
+                $('#submitBtn').on('click', function (e) {
+                    if(datas!=null){
+                        var result=0;
+                        $.each(datas, function (index, val){
+                            var answer=val.answer;
+                            var name = "name"+index;
+                            var value=$('input[name='+name+']:checked').val();
+                            if(answer==value){
+                                result++;
+                            }
 
-            //下一页
-            function nextSlidle(e,swiper) {
-                swiper.slideNext();
-                e.stopPropagation();
+                        });
+                        alert(result);
+                    }else {
+                        alert("请做完答题");
+                    }
+                })
             }
-
-
-            $('#submitBtn').on('click', function (e) {
-                var v=$('input[name=name0]:checked').val();
-                alert(v);
-            })
-        }
+        })
     })
-
-
-
-
 
 </script>
 </body>
