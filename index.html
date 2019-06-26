@@ -98,75 +98,6 @@
                   swiper-animate-delay="0.1s">开始答题</span>
         </article>
 
-
-        <article class="swiper-slide slide2">
-            <img src="img/bg_main02.jpg">
-            <img src="img/tiananmen.png">
-            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.5s">
-            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.1s">
-            <div>
-                <h3>1.植树节是哪一天？</h3>
-                <ul>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
-                    </li>
-                </ul>
-            </div>
-
-        </article>
-        <article class="swiper-slide slide2">
-            <img src="img/bg_main02.jpg">
-            <img src="img/tiananmen.png">
-            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.5s">
-            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.1s">
-            <div>
-                <h3>1.植树节是哪一天？</h3>
-                <ul>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
-                    </li>
-                </ul>
-            </div>
-        </article>
-        <article class="swiper-slide slide2">
-            <img src="img/bg_main02.jpg">
-            <img src="img/tiananmen.png">
-            <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.5s">
-            <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.1s">
-            <div>
-                <h3>1.植树节是哪一天？</h3>
-                <ul>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日dfdsfdsfdsfsdfsdfdsvdcvfdvfdvfdvfdvdcv  dvfvfdvfdvdf</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="name"> 3月14日的范德萨发的发的顺丰范德萨大V过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大过分过分过分的发大V刚发鬼地方</label>
-                    </li>
-                </ul>
-            </div>
-        </article>
-
     </div>
     <a href="#" id="btn2">
         <img src="img/bottom.png" class="bottom" id="bottom">
@@ -181,44 +112,91 @@
 
 <!-- Initialize Swiper -->
 <script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        direction: 'vertical',
-        onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
-            swiperAnimateCache(swiper); //隐藏动画元素
-            swiperAnimate(swiper); //初始化完成开始动画
-        },
-        onSlideChangeEnd: function (swiper) {
-            var aArticle = $('article');
-           if(swiper.activeIndex === aArticle.length-1){
-               $('#submitBtn').show();
-               $('#btn2').hide();
-              // swiper.lockSwipes();
-           }else{
-               $('#submitBtn').hide();
-               $('#btn2').show();
-           } //切换结束时，告诉我现在是第几个slide
-            swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+    var templ="";
+    $.ajax({
+        url: "json/data.json",//json文件位置
+        type: "GET",//请求方式为get
+        dataType: "json", //返回数据格式为json
+        success: function (res) {//请求成功完成后要执行的方法
+            //each循环 使用$.each方法遍历返回的数据date
+            $.each(res, function (i, item) {
+                var template2 = '';
+                $.each(item.content, function (index, val) {
+                    template2 += `<li>
+                        <label><input type="radio" name="${'name' + i}" value='${index}'> ${val}</label>
+                    </li>`;
+                });
+                templ = `
+                 <article class="swiper-slide slide2">
+                    <img src="img/bg_main02.jpg">
+                    <img src="img/tiananmen.png">
+                    <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
+                         swiper-animate-delay="0.5s">
+                    <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                         swiper-animate-delay="0.1s">
+                    <div>
+                        <h3>${item.title}</h3>
+                        <ul>
+                           ${template2}
+                        </ul>
+                    </div>
+                 </article>
+               `;
+                $('.swiper-wrapper').append(templ);
+            })
+
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                direction: 'vertical',
+                onInit: function (swiper) { //Swiper2.x的初始化是onFirstInit
+                    swiperAnimateCache(swiper); //隐藏动画元素
+                    swiperAnimate(swiper); //初始化完成开始动画
+                },
+                onSlideChangeEnd: function (swiper) {
+                    var aArticle = $('article');
+                    console.log(aArticle.length-1);
+                    if(swiper.activeIndex === aArticle.length-1){
+                        $('#submitBtn').show();
+                        $('#btn2').hide();
+                        // swiper.lockSwipes();
+                    }else{
+                        $('#submitBtn').hide();
+                        $('#btn2').show();
+                    } //切换结束时，告诉我现在是第几个slide
+                    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+                }
+            });
+            $('#btn2').on('click', function (e) {
+                nextSlidle(e,swiper);
+            })
+
+            $('#startBtn').on('click', function (e) {
+                nextSlidle(e,swiper);
+            })
+
+            $('.slide2 ul').on('click','li', function (e) {
+                nextSlidle(e,swiper);
+            })
+
+            //下一页
+            function nextSlidle(e,swiper) {
+                swiper.slideNext();
+                e.stopPropagation();
+            }
+
+
+            $('#submitBtn').on('click', function (e) {
+                var v=$('input[name=name0]:checked').val();
+                alert(v);
+            })
         }
-    });
-    $('#btn2').on('click', function (e) {
-        nextSlidle(e,swiper);
     })
 
-    $('#startBtn').on('click', function (e) {
-        nextSlidle(e,swiper);
-    })
 
-    $('.slide2 ul').on('click','li', function (e) {
-        nextSlidle(e,swiper);
-    })
 
-    //下一页
-    function nextSlidle(e,swiper) {
-        swiper.slideNext()
-        e.stopPropagation();
-    }
+
+
 </script>
 </body>
 </html>
