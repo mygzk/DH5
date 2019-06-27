@@ -12,6 +12,7 @@
     <!-- slidle1 css-->
     <link rel="stylesheet" href="css/slide1.css">
     <link rel="stylesheet" href="css/slide2.css">
+    <link rel="stylesheet" href="css/slide3.css">
     <!-- Demo styles -->
     <style>
         html, body {
@@ -64,7 +65,7 @@
 
         .bottom {
             position: fixed;
-            bottom: 0px;
+            bottom: 0;
             margin-left: -52px;
             left: 50%;
             z-index: 2015;
@@ -79,9 +80,9 @@
     <div class="swiper-wrapper">
         <!-- 第一页-->
         <article class="swiper-slide slide1">
-            <img src="img/shanghetu.png">
+            <img src="img/shanghetu.png" alt="">
             <img src="img/tiananmen.png" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s"
-                 swiper-animate-delay="0.1s">
+                 swiper-animate-delay="0.1s" alt="">
             <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
                  swiper-animate-delay="0.5s">
             <img src="img/bg_main01.png">
@@ -98,6 +99,7 @@
                   swiper-animate-delay="0.1s">开始答题</span>
         </article>
 
+
     </div>
     <a href="#" id="btn2">
         <img src="img/bottom.png" class="bottom" id="bottom">
@@ -112,25 +114,31 @@
 
 <!-- Initialize Swiper -->
 <script>
-    $(function(){
+    $(function () {
         var datas;
-        var templ="";
+        var templ = "";
+        var result = 0;
         $.ajax({
             url: "json/data.json",//json文件位置
             type: "GET",//请求方式为get
             dataType: "json", //返回数据格式为json
-            success: function (res) {//请求成功完成后要执行的方法
-                datas=res;
+            success: function (res) {
+                //请求成功完成后要执行的方法
+                datas = res;
                 //each循环 使用$.each方法遍历返回的数据date
                 $.each(res, function (i, item) {
                     var template2 = '';
                     $.each(item.content, function (index, val) {
-                        template2 += `<li>
-                        <label><input type="radio" name="${'name' + i}" value='${index}'> ${val}</label>
-                    </li>`;
+                        template2 += `<li><label><input type="radio" name="${'name' + i}" value='${index}'> ${val}</label></li>`;
                     });
+                    var arKey = "";
+                    if (i == res.length - 1) {
+                        arKey = "lastone";
+                    } else {
+                        arKey = "";
+                    }
                     templ += `
-                 <article class="swiper-slide slide2">
+                 <article class="swiper-slide slide2" accesskey="${arKey}">
                     <img src="img/bg_main02.jpg">
                     <img src="img/tiananmen.png">
                     <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
@@ -145,7 +153,10 @@
                     </div>
                  </article>
                `;
-                })
+                });
+
+
+
 
                 var swiper = new Swiper('.swiper-container', {
                     pagination: '.swiper-pagination',
@@ -157,56 +168,134 @@
                     },
                     onSlideChangeEnd: function (swiper) {
                         var aArticle = $('article');
-                        // console.log(swiper.activeIndex);
-                        // console.log(aArticle.length-1);
-                        if(swiper.activeIndex === aArticle.length-1){
-                            $('#submitBtn').show();
-                            $('#btn2').hide();
-                            // swiper.lockSwipes();
-                        }else{
+
+                        var ar = aArticle[aArticle.length - 1];
+                        var key = ar.accessKey;
+
+                        if (key == "result") {
                             $('#submitBtn').hide();
-                            $('#btn2').show();
+                            $('#btn2').hide();
+                        }
+
+                        if (swiper.activeIndex === aArticle.length - 1) {
+                            if (key == "result") {
+                                $('#submitBtn').hide();
+                                $('#btn2').hide();
+                            } else if (key == "lastone") {
+                                $('#submitBtn').show();
+                                $('#btn2').hide();
+                            }
+
+
+                        } else {
+                            if (swiper.activeIndex != aArticle.length - 1) {
+                                $('#submitBtn').hide();
+                                $('#btn2').show();
+                            }
+
                         } //切换结束时，告诉我现在是第几个slide
                         swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
                     }
                 });
                 swiper.appendSlide(templ);
+
                 $('#btn2').on('click', function (e) {
-                    nextSlidle(e,swiper);
+                    nextSlidle(e, swiper);
                 })
 
                 $('#startBtn').on('click', function (e) {
-                    nextSlidle(e,swiper);
+                    nextSlidle(e, swiper);
                 })
 
-                $('.slide2 ul').on('click','input', function (e) {
-                    nextSlidle(e,swiper);
+                $('.slide2 ul').on('click', 'input', function (e) {
+                    nextSlidle(e, swiper);
                 })
 
                 //下一页
-                function nextSlidle(e,swiper) {
+                function nextSlidle(e, swiper) {
                     swiper.slideNext();
                     e.stopPropagation();
                 }
 
 
                 $('#submitBtn').on('click', function (e) {
-                    if(datas!=null){
-                        var result=0;
-                        $.each(datas, function (index, val){
-                            var answer=val.answer;
-                            var name = "name"+index;
-                            var value=$('input[name='+name+']:checked').val();
-                            if(answer==value){
+                    result=5;
+                    addResultpPage(result);
+                    $('#btn2').hide();
+                    $('#submitBtn').hide();
+
+                    nextSlidle(e, swiper);
+                    swiper.lockSwipes();
+
+                    if (true) {
+                        return;
+                    }
+                    if (datas != null) {
+
+                        $.each(datas, function (index, val) {
+                            var answer = val.answer;
+                            var name = "name" + index;
+                            var value = $('input[name=' + name + ']:checked').val();
+                            if (answer == value) {
                                 result++;
                             }
 
                         });
                         alert(result);
-                    }else {
+                    } else {
                         alert("请做完答题");
                     }
                 })
+
+
+
+
+                function addResultpPage( result) {
+                    var resulttemp = '<article class="swiper-slide slide3" accesskey="result">' +
+                        '<img src="img/bg_main02.jpg">' +
+
+                        '<div>' +
+                        '<H1>测试结果</H1>'+
+                        '<img src="img/huabiao.png">';
+
+                    if(result==0){
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>需要加油额</h3></div>`;
+                    }else if(result==1){
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>运气不做 蒙对了一道 哈哈</h3></div>`;
+                    }else if(result==2){
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>哈哈 还答对了两题</h3></div>`;
+                    }else if(result==3){
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>很厉害了 答对了这么多</h3></div>`;
+                    }else if(result==4){
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>你很优秀 马上就满分了 </h3></div>`;
+                    }else {
+                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
+                            `<h3>你是最棒额 小伙子！！！</h3></div>`;
+                    }
+
+                    resulttemp = resulttemp + '</div>' +
+                        ' <span id="tryAgainBtn" class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s"\n' +
+                        '                  swiper-animate-delay="0.1s" >再来一次</span>'+
+                        '</article>';
+
+                    swiper.appendSlide(resulttemp);
+                    $('#tryAgainBtn').on('click', function (e) {
+                        // swiper.unlockSwipes();
+                        // swiper.slideTo(0, 1000, true);
+                        location.reload();
+                    })
+                }
+
+
+
+
+
+
             }
         })
     })
