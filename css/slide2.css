@@ -39,6 +39,9 @@
 }
 .slide2 div h3{
     color: #fff;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: left;
 }
 .slide2 div ul{
     list-style: none;

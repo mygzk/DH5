@@ -9,13 +9,7 @@
     top: 0;
 }
 
-.slide3  img:nth-child(2){
-    width: 18%;
-    height: 18%;
-    position: absolute;
-    top: 10%;
-    left: 42%;
-}
+
 
 .slide3 div{
     width: 100%;
@@ -23,10 +17,24 @@
     position: absolute;
     top: 10%;
 }
+.slide3  div img:nth-child(1){
+    width: 18%;
+    height: 18%;
+    position: absolute;
+    top: 10%;
+    left: 42%;
+}
 .slide3 div div{
     width: 100%;
     position: absolute;
     top: 30%;
+}
+
+.slide3 div h3{
+    color: #fff;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
 }
 
 .slide3 span,#tryAgainBtn{
