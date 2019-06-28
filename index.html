@@ -123,16 +123,19 @@
             type: "GET",//请求方式为get
             dataType: "json", //返回数据格式为json
             success: function (res) {
+
+
+            var realData= getRealData(res);
                 //请求成功完成后要执行的方法
-                datas = res;
+                datas = realData;
                 //each循环 使用$.each方法遍历返回的数据date
-                $.each(res, function (i, item) {
+                $.each(realData, function (i, item) {
                     var template2 = '';
                     $.each(item.content, function (index, val) {
                         template2 += `<li><label><input type="radio" name="${'name' + i}" value='${index}'> ${val}</label></li>`;
                     });
                     var arKey = "";
-                    if (i == res.length - 1) {
+                    if (i == realData.length - 1) {
                         arKey = "lastone";
                     } else {
                         arKey = "";
@@ -154,9 +157,6 @@
                  </article>
                `;
                 });
-
-
-
 
                 var swiper = new Swiper('.swiper-container', {
                     pagination: '.swiper-pagination',
@@ -290,8 +290,42 @@
                     })
                 }
 
+                /**
+                 * @param data
+                 * @returns {Array}
+                 */
+                function getRealData(data) {
+                    var realData=[];
+                    var arr=[];
+                    var max = data.length;
+                    for (var i=0;i<max;i++){
+                        var arrNum=parseInt(Math.random()*max)+1;
+                        var flag= true;
+                        for(var j=0;j<=arr.length;j++){
+                            if(arrNum==arr[j]){
+                                flag = false;
+                                break;
+                            }
+                        }
+
+                        if(flag){
+                            arr.push(arrNum);
+                        }else {
+                            i--;
+                        }
+                        if(arr.length==5){
+                            break;
+                        }
+                    }
+                    for (var i=0;i<arr.length;i++){
+                        realData.push(data[arr[i]]);
+                    }
 
 
+
+                    return realData;
+
+                }
 
 
 
