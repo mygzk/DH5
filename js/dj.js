@@ -182,7 +182,7 @@ $(function () {
                     } else {
                         i--;
                     }
-                    if (arr.length == 1) {
+                    if (arr.length === 5) {
                         break;
                     }
                 }
