@@ -279,7 +279,8 @@
                     }
 
                     resulttemp = resulttemp + '</div>' +
-                        ' <span id="tryAgainBtn">再来一次</span>'+
+                        ' <span id="tryAgainBtn" class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s"\n' +
+                        '                  swiper-animate-delay="0.1s">再来一次</span>'+
                         '</article>';
 
                     swiper.appendSlide(resulttemp);
@@ -313,7 +314,7 @@
                         }else {
                             i--;
                         }
-                        if(arr.length==5){
+                        if(arr.length==1){
                             break;
                         }
                     }
