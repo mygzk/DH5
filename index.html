@@ -7,6 +7,7 @@
     <script src="js/jquery-1.10.1.min.js"></script>
     <script src="js/swiper.animate1.0.2.min.js"></script>
     <link rel="stylesheet" href="css/animate.min.css"/>
+    <link rel="stylesheet" href="css/my.animate.css"/>
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="css/swiper.min.css">
     <!-- slidle1 css-->
@@ -125,7 +126,7 @@
             success: function (res) {
 
 
-            var realData= getRealData(res);
+                var realData = getRealData(res);
                 //请求成功完成后要执行的方法
                 datas = realData;
                 //each循环 使用$.each方法遍历返回的数据date
@@ -146,10 +147,10 @@
                     <img src="img/tiananmen.png">
                     <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"
                          swiper-animate-delay="0.5s">
-                    <img src="img/baige02.png" class="ani" swiper-animate-effect="slideInRight" swiper-animate-duration="1s"
+                    <img src="img/baige02.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="2s"
                          swiper-animate-delay="0.1s">
-                    <div>
-                        <h3>${(i+1)+'. '+item.title}</h3>
+                    <div class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
+                        <h3 >${(i + 1) + '. ' + item.title}</h3>
                         <ul>
                            ${template2}
                         </ul>
@@ -219,19 +220,12 @@
 
 
                 $('#submitBtn').on('click', function (e) {
-                    result=5;
-                    addResultpPage(result);
-                    $('#btn2').hide();
-                    $('#submitBtn').hide();
 
-                    nextSlidle(e, swiper);
-                    swiper.lockSwipes();
 
-                    if (true) {
+                   /* if (true) {
                         return;
-                    }
+                    }*/
                     if (datas != null) {
-
                         $.each(datas, function (index, val) {
                             var answer = val.answer;
                             var name = "name" + index;
@@ -241,52 +235,53 @@
                             }
 
                         });
-                        alert(result);
+                        addResultpPage(result);
+                        $('#btn2').hide();
+                        $('#submitBtn').hide();
+
+                        nextSlidle(e, swiper);
+                        swiper.lockSwipes();
+
                     } else {
                         alert("请做完答题");
                     }
                 })
 
 
-
-
-                function addResultpPage( result) {
+                function addResultpPage(result) {
                     var resulttemp = '<article class="swiper-slide slide3" accesskey="result">' +
                         '<img src="img/bg_main02.jpg">' +
 
                         '<div>' +
-                       /* '<H3>测试结果</H3>'+*/
-                        '<img src="img/huabiao.png">';
+                        /* '<H3>测试结果</H3>'+*/
+                        '<img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeInUpS" swiper-animate-duration="2s" swiper-animate-delay="0.1s">';
 
-                    if(result==0){
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>需要加油额</h3></div>`;
-                    }else if(result==1){
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>运气不做 蒙对了一道 哈哈</h3></div>`;
-                    }else if(result==2){
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>哈哈 还答对了两题</h3></div>`;
-                    }else if(result==3){
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>很厉害了 答对了这么多</h3></div>`;
-                    }else if(result==4){
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>你很优秀 马上就满分了 </h3></div>`;
-                    }else {
-                        resulttemp = resulttemp +`<div><h3>你本次测评结果: ${result}</h3>`+
-                            `<h3>你是最棒额 小伙子！！！</h3></div>`;
+                    var scoreText = '你本次测评结果:' + result;
+                    var contetnText = '';
+                    if (result == 0) {
+                        contetnText = '需要加油额';
+                    } else if (result == 1) {
+                        contetnText = '运气不做 蒙对了一道 哈哈';
+                    } else if (result == 2) {
+                        contetnText = '哈哈 还答对了两题,还可以提高额';
+
+                    } else if (result == 3) {
+                        contetnText = '很厉害了 答对了这么多';
+                    } else if (result == 4) {
+                        contetnText = '你很优秀 马上就满分了';
+                    } else {
+                        contetnText = '你是最棒额 小伙子！！';
                     }
 
+                    resulttemp = resulttemp + `<div><h3 class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.1s"> ${scoreText}</h3>` +
+                        `<h3 class="ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="2s" swiper-animate-delay="0.1s">${contetnText}</h3></div>`;
                     resulttemp = resulttemp + '</div>' +
                         ' <span id="tryAgainBtn" class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s"\n' +
-                        '                  swiper-animate-delay="0.1s">再来一次</span>'+
+                        '                  swiper-animate-delay="0.1s">再来一次</span>' +
                         '</article>';
 
                     swiper.appendSlide(resulttemp);
                     $('#tryAgainBtn').on('click', function (e) {
-                        // swiper.unlockSwipes();
-                        // swiper.slideTo(0, 1000, true);
                         location.reload();
                     })
                 }
@@ -296,38 +291,36 @@
                  * @returns {Array}
                  */
                 function getRealData(data) {
-                    var realData=[];
-                    var arr=[];
+                    var realData = [];
+                    var arr = [];
                     var max = data.length;
-                    for (var i=0;i<max;i++){
-                        var arrNum=parseInt(Math.random()*max)+1;
-                        var flag= true;
-                        for(var j=0;j<=arr.length;j++){
-                            if(arrNum==arr[j]){
+                    for (var i = 0; i < max; i++) {
+                        var arrNum = parseInt(Math.random() * max) + 1;
+                        var flag = true;
+                        for (var j = 0; j <= arr.length; j++) {
+                            if (arrNum == arr[j]) {
                                 flag = false;
                                 break;
                             }
                         }
 
-                        if(flag){
+                        if (flag) {
                             arr.push(arrNum);
-                        }else {
+                        } else {
                             i--;
                         }
-                        if(arr.length==1){
+                        if (arr.length == 1) {
                             break;
                         }
                     }
-                    for (var i=0;i<arr.length;i++){
+                    for (var i = 0; i < arr.length; i++) {
                         realData.push(data[arr[i]]);
                     }
-
 
 
                     return realData;
 
                 }
-
 
 
             }
