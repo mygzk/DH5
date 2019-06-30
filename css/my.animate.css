@@ -56,3 +56,97 @@
     -webkit-animation-name: fadeInUpS;
     animation-name: fadeInUpS;
 }
+
+
+.flash{
+    -webkit-animation:flash 2s forwards;
+    animation:flash 2s forwards;
+}
+@-webkit-keyframes flash{
+    0%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 0.3;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes flash{
+    0%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 0.3;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+/*音乐转*/
+.audioOpen{
+    -webkit-animation:audioOpen 5s infinite;
+    animation:audioOpen 5s infinite;
+    transform-origin:center center;
+}
+@-webkit-keyframes audioOpen{
+    0%{
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100%{
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes audioOpen{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*音频控制*/
+.audioControl{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    z-index: 999;
+    top:5%;
+    opacity: 0.7;
+    right:2%;
+}
+.audioOpen{
+  background: url(../img/audio_open.png) no-repeat;
+    background-size: cover;
+}
+.audioClose{
+    background: url(../img/audio_close.png) no-repeat;
+    background-size: cover;
+}
+.openAudio{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top:430px;
+    left:50%;
+    margin-left:-50px;
+    z-index: 99999;
+    opacity: 0;
+}

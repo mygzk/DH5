@@ -1,4 +1,27 @@
 $(function () {
+    var audioPlayer = $('#myaudio');
+
+    var audioC=1;
+    $(".audioControl").on("click",function(){
+        if(audioC == 0){
+            $(this).removeClass("audioOpen");
+            $(this).addClass("audioClose");
+            audioC = 1;
+        }else{
+            $(this).removeClass("audioClose");
+            $(this).addClass("audioOpen");
+            audioC = 0;
+        }
+
+
+        if(audioPlayer.paused) {
+            audioPlayer.play();
+        }else {
+            audioPlayer.pause();
+        }
+    });
+
+
     var datas;
     var templ = "";
     var result = 0;

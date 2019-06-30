@@ -12,6 +12,7 @@
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="css/swiper.min.css">
     <!-- slidle1 css-->
+    <link rel="stylesheet" href="css/slide0.css">
     <link rel="stylesheet" href="css/slide1.css">
     <link rel="stylesheet" href="css/slide2.css">
     <link rel="stylesheet" href="css/slide3.css">
@@ -79,7 +80,27 @@
 <body>
 <!-- Swiper -->
 <div class="swiper-container">
+
+
     <div class="swiper-wrapper">
+
+        <article class="swiper-slide slide0">
+            <img src="img/bg_main02.jpg">
+            <div>
+
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="0.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="1.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="2.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
+
+            </div>
+
+        </article>
+
+
+
         <!-- 第一页-->
         <article class="swiper-slide slide1">
             <img src="img/shanghetu.png" alt="">
@@ -107,8 +128,16 @@
         <img src="img/bottom.png" class="bottom" id="bottom">
     </a>
     <span id="submitBtn">提交答题</span>
-    <!-- Add Pagination -->
-    <!--   <div class="swiper-pagination"></div>-->
+
+    <!--音频-->
+    <span class="audioControl audioOpen"></span>
+    <div style="display: none">
+        <audio  id="myaudio" src="js/pfdyt.mp3"  controls="controls" autoplay="autoplay" loop="true" >
+        </audio>
+<!--        <audio src="/img/MAIN/2019/05/119300/static/mp3/audio.mp3" id="audio" loop></audio>-->
+<!--        <audio src="/img/MAIN/2019/05/119300/static/mp3/audio1.mp3" id="audio1"></audio>-->
+    </div>
+
 </div>
 
 <!-- Swiper JS -->
