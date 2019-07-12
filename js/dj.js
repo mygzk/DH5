@@ -1,23 +1,19 @@
 $(function () {
-    var audioPlayer = $('#myaudio');
+    let audio = $('#myaudio');
+    audio.prop("stopped", 1);
 
-    var audioC=1;
-    $(".audioControl").on("click",function(){
-        if(audioC == 0){
-            $(this).removeClass("audioOpen");
-            $(this).addClass("audioClose");
-            audioC = 1;
-        }else{
+    $(".audioControl").on("click", function () {
+        let audioPlayer = $('#myaudio');
+        if (audioPlayer.prop("stopped") === 1) {
+            audioPlayer[0].play();
+            audioPlayer.prop("stopped", 0);
             $(this).removeClass("audioClose");
             $(this).addClass("audioOpen");
-            audioC = 0;
-        }
-
-
-        if(audioPlayer.paused) {
-            audioPlayer.play();
-        }else {
-            audioPlayer.pause();
+        } else {
+            audioPlayer[0].pause();
+            audioPlayer.prop("stopped", 1);
+            $(this).removeClass("audioOpen");
+            $(this).addClass("audioClose");
         }
     });
 
@@ -45,16 +41,16 @@ $(function () {
                 } else {
                     arKey = "";
                 }
-                templ += `<article class="swiper-slide slide2" accesskey="${arKey}">`+
-                    `<img src="img/bg_main02.jpg">`+
-                    `<img src="img/tiananmen.png">`+
-                   ` <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"swiper-animate-delay="0.5s">`+
-                   `<img src="img/baige02.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="1s"swiper-animate-delay="0.1s">`+
-                    `<div class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.1s">`+
-                       ` <h3 >${(i + 1) + '. ' + item.title}</h3>`+
-                       ` <ul> ${template2}</ul>`+
-                   `</div>`+
-                   `</article>`;
+                templ += `<article class="swiper-slide slide2" accesskey="${arKey}">` +
+                    `<img src="img/bg_main02.jpg">` +
+                    `<img src="img/tiananmen.png">` +
+                    ` <img src="img/huabiao.png" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s"swiper-animate-delay="0.5s">` +
+                    `<img src="img/baige02.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="1s"swiper-animate-delay="0.1s">` +
+                    `<div class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.1s">` +
+                    ` <h3 >${(i + 1) + '. ' + item.title}</h3>` +
+                    ` <ul> ${template2}</ul>` +
+                    `</div>` +
+                    `</article>`;
             });
 
             var swiper = new Swiper('.swiper-container', {
@@ -154,16 +150,11 @@ $(function () {
 
                 var scoreText = '你本次测评结果:' + result;
                 var contetnText = '';
-                if (result === 0) {
-                    contetnText = '需要加油额';
-                } else if (result=== 1) {
-                    contetnText = '运气不做 蒙对了一道 哈哈';
-                } else if (result === 2) {
-                    contetnText = '哈哈 还答对了两题,还可以提高额';
-
-                } else if (result === 3) {
-                    contetnText = '很厉害了 答对了这么多';
-                } else if (result === 4) {
+                if (result <= 3) {
+                    contetnText = '还是要提高知识水平,上升空间有很多';
+                } else if (result <= 5) {
+                    contetnText = '很厉害了，答对了这么多';
+                } else if (result === 6) {
                     contetnText = '你很优秀 马上就满分了';
                 } else {
                     contetnText = '你是最棒额 小伙子！！';
@@ -205,7 +196,7 @@ $(function () {
                     } else {
                         i--;
                     }
-                    if (arr.length === 5) {
+                    if (arr.length === 7) {
                         break;
                     }
                 }

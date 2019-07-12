@@ -83,22 +83,26 @@
 
 
     <div class="swiper-wrapper">
-
         <article class="swiper-slide slide0">
             <img src="img/bg_main02.jpg">
+            <!--            <video id="video">-->
+            <!--                <source src="js/h5_1.mp4" type="video/mp4" codecs="aac1.42E01E, mp4a.40.2"></source>-->
+            <!--            </video>-->
             <div>
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="0.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日
+                </h3>
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="1.1s" alt="">中国共产党人的初心和使命,就是为中国人民谋幸福,为中华民族谋复兴。 不忘初心，牢记使命。
+                     </h3>
+                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
+                    swiper-animate-delay="2.1s" alt="">新时代孕育新思想，新思想引领新征程。我们要不忘初心、牢记使命，永不僵化、永不停滞，规划一件、干成一件；干成一件、又瞄准更长远的一件，久久为功，行稳致远。
+                </h3>
 
-                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
-                    swiper-animate-delay="0.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
-                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
-                    swiper-animate-delay="1.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
-                <h3 class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s"
-                    swiper-animate-delay="2.1s" alt="">中国共产党（英文名：the Communist Party of China，简写CPC），简称中共，创建于1921年7月23日 [1]  </h3>
 
             </div>
 
         </article>
-
 
 
         <!-- 第一页-->
@@ -130,14 +134,13 @@
     <span id="submitBtn">提交答题</span>
 
     <!--音频-->
-    <span class="audioControl audioOpen"></span>
+    <span class="audioControl audioClose"></span>
     <div style="display: none">
-        <audio  id="myaudio" src="js/pfdyt.mp3"  controls="controls" autoplay="autoplay" loop="true" >
+        <audio id="myaudio" controls="controls" autoplay="autoplay" loop="loop">
+            <source src="js/h5_2.mp3" type="audio/mpeg"/>
+            Your browser does not support the audio element.
         </audio>
-<!--        <audio src="/img/MAIN/2019/05/119300/static/mp3/audio.mp3" id="audio" loop></audio>-->
-<!--        <audio src="/img/MAIN/2019/05/119300/static/mp3/audio1.mp3" id="audio1"></audio>-->
     </div>
-
 </div>
 
 <!-- Swiper JS -->
@@ -145,5 +148,12 @@
 
 <!-- Initialize Swiper -->
 <script src="js/dj.js"></script>
+<!--<script>-->
+<!--    window.onload=function(){-->
+<!--        var oVideo = document.getElementById("video");-->
+<!--        oVideo.play();-->
+<!--    }-->
+<!--</script>-->
+
 </body>
 </html>
